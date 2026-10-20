@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
+    <title>MI PRIMERA VEZ CON JAVASCRIPT</title>
+</head>
+<body>
+
+<nav class="navbar fg-2 bg-primary">
+    <div class="container fluid">
+        <a class="navbar-brand" href="index.html">
+            <img src="OIP.jpg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                PRACTICA 1 JAVASCRIPT
+        </a>    
+    </div>
+</nav>
+
+<div class="container p-4">
+    <div class="row">
+        <div class="col">
+            <button class="btn-solid theme-danger my-3" onclick="mensaje()"><i class="bi bi-trash mx-1"></i> ELIMINAR</button>
+            <button class="btn-outline theme-success my-3" onclick="mensaje2()"><i class="bi bi-globe-americas-fill"></i> EDITAR</button>
+            <button class="btn-solid theme-warning my-3" onclick="mensaje3()"><i class="bi bi-hospital"></i> HOSPITAL</button>
+            <button class="btn-solid theme-info my-3" onclick="mensaje4()"><i class="bi bi-rulers"></i> MEDIR</button>
+            <button class="btn-solid theme-dark my-3" onclick="mensaje5()"><i class="bi bi-card-image"></i> IMAGEN</button>
+        </div>
+        <div class="col">
+            <button class="btn-solid theme-success my-3" onclick="mensaje6()"><i class="bi bi-aspect-ratio"></i> TAMAÑO</button>
+            <button class="btn-solid theme-secondary my-3" onclick="mensaje7()"><i class="bi bi-mic-mute"></i> SILENCIAR</button>
+            <button class="btn-solid theme-primary my-3" onclick="mensaje8()"><i class="bi bi-gem"></i> ELIMINAR</button>
+            <button class="btn-outline theme-danger my-3" onclick="mensaje9()"><i class="bi bi-star"></i> BORRAR</button>
+            <button class="btn-outline theme-warning my-3" onclick="mensaje10()"><i class="bi bi-hearts"></i> QUITAR</button>  
+        </div>
+    </div>
+</div>
+
+<script src="bootstrap.bundle.min.js"></script>
+<script src="sweetalert2.all.min.js"></script>
+<script>
+    function mensaje(){
+        Swal.fire({
+          title: "ÉXITO",
+          text: "Se ejecutó correctamente el script",
+          icon: "success"
+        });
+    }
+
+
+    function mensaje2(){
+        Swal.fire({
+          title: "Edición",
+          text: "Se abrió edición",
+          icon: "info"
+        });
+    }
+    function mensaje3(){
+        Swal.fire({
+  title: "The Internet?",
+  text: "That thing is still around?",
+  icon: "question"
+});
+    }
+    
+    function mensaje4(){
+        Swal.fire({
+  icon: "error",
+  title: "Oops...",
+  text: "Something went wrong!",
+  footer: "<a href=\"#\">Why do I have this issue?</a>"
+});
+    }
+
+    function mensaje5(){
+        Swal.fire({
+          title: "Galería de Imágenes",
+          text: "Imagen agregada correctamente",
+          imageUrl: "OIP.jpg",
+          imageWidth: 100,
+          imageHeight: 80,
+          imageAlt: "Vista previa",
+        });
+    }
+
+    function mensaje6(){
+       Swal.fire({
+  title: "<strong>HTML <u>example</u></strong>",
+  icon: "info",
+  html: `
+    You can use <b>bold text</b>,
+    <a href="#" autofocus>links</a>,
+    and other HTML tags
+  `,
+  showCloseButton: true,
+  showCancelButton: true,
+  focusConfirm: false,
+  confirmButtonText: `
+    👍 Great!
+  `,
+  confirmButtonAriaLabel: "Thumbs up, great!",
+  cancelButtonText: `
+    👎
+  `,
+  cancelButtonAriaLabel: "Thumbs down"
+});
+    }
+    function mensaje7(){
+        Swal.fire({
+  title: "Do you want to save the changes?",
+  showDenyButton: true,
+  showCancelButton: true,
+  confirmButtonText: "Save",
+  denyButtonText: `Don't save`
+}).then((result) => {
+  /* Read more about isConfirmed, isDenied below */
+  if (result.isConfirmed) Swal.fire("Saved!", "", "success");
+  else if (result.isDenied) Swal.fire("Changes are not saved", "", "info");
+});
+    }
+
+    function mensaje8(){
+        Swal.fire({
+  position: "top-end",
+  icon: "success",
+  title: "Your work has been saved",
+  showConfirmButton: false,
+  timer: 1500
+});
+    }
+    function mensaje9(){
+       Swal.fire({
+  title: "Are you sure?",
+  text: "You won't be able to revert this!",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Yes, delete it!"
+}).then((result) => {
+  if (result.isConfirmed) Swal.fire({
+    title: "Deleted!",
+    text: "Your file has been deleted.",
+    icon: "success"
+  });
+});
+    }
+    function mensaje10(){
+        Swal.fire({
+  title: "Submit your GitHub username",
+  input: "text",
+  inputAttributes: { autocapitalize: "off" },
+  showCancelButton: true,
+  confirmButtonText: "Look up",
+  showLoaderOnConfirm: true,
+  preConfirm: async (login) => {
+    try {
+      const githubUrl = `
+        https://api.github.com/users/${login}
+      `;
+      const response = await fetch(githubUrl);
+      if (!response.ok) return Swal.showValidationMessage(`
+          ${JSON.stringify(await response.json())}
+        `);
+      return response.json();
+    } catch (error) {
+      Swal.showValidationMessage(`
+        Request failed: ${error}
+      `);
+    }
+  },
+  allowOutsideClick: () => !Swal.isLoading()
+}).then((result) => {
+  if (result.isConfirmed) Swal.fire({
+    title: `${result.value.login}'s avatar`,
+    imageUrl: result.value.avatar_url
+  });
+});
+    }
+</script>
+</body>
+</html>
