@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRÉDITO BERSHKA</title>
+    <link rel="stylesheet" href="be.css" />
+</head>
+<body onload="calcular()">
+    
+    <img src="img/ber.jpg" alt="Bershka" width="200">
+    <h1>CRÉDITO BERSHKA</h1>
+    <hr />
+    <br />
+    <h3>Producto:</h3>
+    <br />
+    <select id="producto" onchange="calcular()">
+        <option value="blusa">BLUSA</option>
+        <option value="pantalon">PANTALÓN</option>
+        <option value="vestido">VESTIDO</option>
+        <option value="falda">FALDA</option>
+        <option value="short">SHORT</option>
+    </select>
+    <div id="img"></div>
+    <div id="precio">Precio: $ 0.00 MXN</div>
+<hr/>
+ <br />
+<h3>Plazo</h3>
+<input type="radio" name="plazo" id="uno" onchange="calcular()" checked/> 6 Meses (+10%) <br/>
+<input type="radio" name="plazo" id="dos" onchange="calcular()"/> 12 Meses (+15%) <br/>
+<input type="radio" name="plazo" id="tres" onchange="calcular()"/> 18 Meses (+20%) <br/>
+<br />
+<h3>Cantidad</h3>
+<input type="number" value="1" min="1" max="10" id="cantidad" onchange="calcular()"/> <br />
+<br />
+<div id="contado">Precio de Contado: $ 0.00 MXN</div>
+<div id="credito">Precio a Crédito: $ 0.00 MXN</div>
+<div id="abono">Abono Mensual: $ 0.00 MXN</div>
+
+    <script src="be.js"></script>
+</body>
+</html>
