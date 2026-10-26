@@ -55,14 +55,7 @@ div#precio{
     margin-top: 10px;
 }
 
-div#contado, div#credito, div#abono{
-    background: #fff;
-    padding: 10px;
-    margin: 8px auto;
-    width: 280px;
-    border: 1px solid #f8bbd0;
-    border-radius: 4px;
-}
+
 
 div#abono{
     font-weight: bold;
