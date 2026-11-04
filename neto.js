@@ -8,7 +8,7 @@ switch(puesto){
     case 1: sueldoHora = 300; break;
     case 2: sueldoHora = 100; break;
     case 3: sueldoHora = 120; break;
-    case 4: sueldoHora = 200; break; // Sueldo por hora para el nuevo puesto (Supervisor)
+    case 4: sueldoHora = 200; break; 
 }
 
 let sueldoBase = sueldoHora * horas;
@@ -16,7 +16,7 @@ let canastaBasica = parseFloat(sueldoBase * 0.025);
 let apoyo = parseFloat(sueldoBase * 0.5);
 let antiguedad = parseFloat(anios * 150);
 let estimulo = parseFloat(sueldoBase * 0.02);
-let bonoPuntualidad = parseFloat(sueldoBase * 0.03); // Nueva percepción (ej. 3% del sueldo base)
+let bonoPuntualidad = parseFloat(sueldoBase * 0.03);
 
 let totalPercepciones = parseFloat(sueldoBase + canastaBasica + apoyo + antiguedad + estimulo + bonoPuntualidad);
 
@@ -24,7 +24,7 @@ let ISR = parseFloat(sueldoBase * 0.15);
 let servicioSalud = parseFloat(sueldoBase * 0.035);
 let AFORE = parseFloat(sueldoBase * 0.04);
 let sindicato = parseFloat(sueldoBase * 0.01);
-let prestamo = parseFloat(sueldoBase * 0.02); // Nueva deducción (ej. 2% del sueldo base)
+let prestamo = parseFloat(sueldoBase * 0.02); 
 
 let totalDeducciones = parseFloat(ISR + servicioSalud + AFORE + sindicato + prestamo);
 let salarioNeto = parseFloat(totalPercepciones - totalDeducciones);
@@ -34,14 +34,14 @@ document.getElementById("apoyo").innerHTML = "<h3>" + apoyo.toFixed(2) + "</h3>"
 document.getElementById("canastaBasica").innerHTML = "<h3>" + canastaBasica.toFixed(2) + "</h3>";
 document.getElementById("antiguedad").innerHTML = "<h3>" + antiguedad.toFixed(2) + "</h3>";
 document.getElementById("estimulo").innerHTML = "<h3>" + estimulo.toFixed(2) + "</h3>";
-document.getElementById("bonoPuntualidad").innerHTML = "<h3>" + bonoPuntualidad.toFixed(2) + "</h3>"; // Mostrar nueva percepción
+document.getElementById("bonoPuntualidad").innerHTML = "<h3>" + bonoPuntualidad.toFixed(2) + "</h3>"; 
 document.getElementById("totalPercepciones").innerHTML = "<h3>" + totalPercepciones.toFixed(2) + "</h3>";
 
 document.getElementById("ISR").innerHTML = "<h3>" + ISR.toFixed(2) + "</h3>";
 document.getElementById("ServicioSalud").innerHTML = "<h3>" + servicioSalud.toFixed(2) + "</h3>";
 document.getElementById("AFORE").innerHTML = "<h3>" + AFORE.toFixed(2) + "</h3>";
 document.getElementById("sindicato").innerHTML = "<h3>" + sindicato.toFixed(2) + "</h3>";
-document.getElementById("prestamo").innerHTML = "<h3>" + prestamo.toFixed(2) + "</h3>"; // Mostrar nueva deducción
+document.getElementById("prestamo").innerHTML = "<h3>" + prestamo.toFixed(2) + "</h3>"; 
 document.getElementById("totalDeducciones").innerHTML = "<h3>" + totalDeducciones.toFixed(2) + "</h3>";
 
 document.getElementById("salarioNeto").innerHTML = "<h3>" + salarioNeto.toFixed(2) + "</h3>";

@@ -1,0 +1,82 @@
+body {
+  background-color: #fffaf0; /* Fondo general crema muy suave */
+  color: #4a3525;            /* Texto marrón oscuro elegante */
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.container {
+  text-align: center;
+  width: 550px;
+}
+
+h1 {
+  color: #d97706; /* Naranja cálido principal */
+  margin-bottom: 20px;
+}
+
+.card {
+  border: 3px solid #f59e0b; /* Borde naranja brillante */
+  background-color: #fffbeb; /* Fondo amarillo/naranja pastel muy claro */
+  display: flex;
+  padding: 25px;
+  gap: 20px;
+}
+
+.controls {
+  flex: 1;
+  text-align: left;
+}
+
+.input-group {
+  margin-bottom: 18px;
+}
+
+.input-group label {
+  display: block;
+  font-weight: bold;
+  color: #78350f; /* Marrón rojizo */
+  margin-bottom: 6px;
+}
+
+input[type="range"] {
+  width: 100%;
+  accent-color: #f97316; /* Color de la barrita deslizante */
+}
+
+.btn-reset {
+  background-color: #ef4444; /* Rojo coral vivo */
+  color: #ffffff;
+  border: 2px solid #b91c1c;
+  padding: 8px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+}
+
+.result {
+  flex: 1;
+  background-color: #ffedd5; /* Naranja pastel suave */
+  border: 2px solid #fb923c;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+}
+
+.result h2 {
+  color: #c2410c; /* Naranja oscuro */
+  margin: 0 0 10px 0;
+  font-size: 1.2rem;
+}
+
+.area-value {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #9a3412; /* Texto destacado del área */
+}

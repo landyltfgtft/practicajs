@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>PRACTICAS JAVASCRIPT</title>
+</head>
+<body>
+    <nav class="navbar bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <img src="img/OIP.jpg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">TIENDITA
+            </a>
+        </div>
+    </nav>
+
+    <div class="container p-4 bg-inverse mt-5 card">
+        <h1 class="text-center fg-black">TIENDITA</h1><hr>
+        <button type="button" class="btn-solid theme-danger w-25 " data-bs-toggle="dialog" data-bs-target="#addProducto"><i class="bi bi-person-plus"></i>Agregar</button>
+        <table class="table table-striped table-hover mt-3">
+<tr class="text-center">
+    <td>PRODUCTO</td>
+    <td>PRECIO</td>
+    <td>CANTIDAD</td>
+    <td>IMPORTE</td>
+    
+</tr>
+<tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+        </table>
+    </div>
+
+
+
+    <dialog class="dialog " id="addProducto">
+  <div class="dialog-header">
+    <h1 class="dialog-title ">AGREGAR PRODUCTO</h1>
+    <button type="button" class="btn-close" data-bs-dismiss="dialog" aria-label="Close"></button>
+  </div>
+  <div class="dialog-body">
+    <h3>NOMBRE</h3>
+    <input type="text" id="nombre" class="form-control"><br>
+    <h3>PRECIO</h3>
+    <input type="text" id="precio" class="form-control"><br>
+    
+  </div>
+  <div class="dialog-footer">
+    <button type="button" class="btn-solid theme-danger" data-bs-dismiss="dialog"><i class="bi bi-x-circle"></i>Cancelar</button>
+    <button type="button" class="btn-solid theme-success" id="btnSave" ><i class="bi bi-floppy-fill"></i>Guardar</button>
+  </div>
+</dialog>
+
+    <script type="module" src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/sweetalert2.all.min.js"></script>
+    <script src="tiendita.js"></script>
+</body>
+</html>

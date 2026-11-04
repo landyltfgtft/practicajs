@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
+    <title>AREA DEL TRIANGULO</title>
+</head>
+<body>
+    <nav class="navbar bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand text-white" href="index.html">
+                <img src="img/OIP.jpg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                PRACTICAS JAVASCRIPT
+            </a>
+        </div>
+    </nav>
+
+    <div class="container p-4 bg-info mt-5 card shadow">
+        <h1 class="text-center">AREA DEL TRIANGULO</h1>
+        <hr>
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h5>BASE: <span id="vb">1</span></h5>
+                <input type="range" class="form-control mb-3" id="base" min="1" max="100" value="1" oninput="calcular()">
+                
+                <h5>ALTURA: <span id="va">1</span></h5>
+                <input type="range" class="form-control mb-3" id="altura" min="1" max="100" value="1" oninput="calcular()">
+                
+                <!-- Changed onclick to limpiar() -->
+                <button class="btn btn-warning mt-3 w-100" onclick="limpiar()">RESET</button>
+            </div>
+            
+            <div class="col-md-6 text-center">
+                <div class="p-4 bg-light rounded border">
+                    <h2>AREA</h2>
+                    <h1 id="area" class="display-4 text-primary">0</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/sweetalert2.all.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
