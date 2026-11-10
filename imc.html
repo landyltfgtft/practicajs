@@ -3,79 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="imc.css">
+    <link rel="stylesheet" href="imc.css">
+
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
     <title>Calculadora IMC</title>
    
 </head>
 <body>
-<div class="container mt-5">
+    <nav class="navbar fg-bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <img src="img/OIP.jpg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                PRACTICAS JAVASCRIPT
+            </a>    
+        </div>
+    </nav>
+
+<div class="container mt-5" style="max-width: 500px;">
     <div>
         <h2 class="text-center mb-4">
-            Calculadora de IMC
+            <i class="bi bi-heart-pulse"></i> Calculadora de IMC
         </h2>
-        <img src="imc.jpeg" alt="Logo" width="30px" height="24"  class="d-inline-block align-text-top">
+
         <div class="mb-4">
             <label class="form-label">
-                Peso<span id="valorPeso">70</span> kg
+                <i class="bi bi-speedometer2"></i> Peso: <span id="valorPeso">70</span> kg
             </label>
             <input type="range" class="form-range" id="peso" min="30" max="150" value="70">
         </div>
+
         <div class="mb-4">
             <label class="form-label">
-                Altura: <span id="valorAltura">1.70</span> m
+                <i class="bi bi-arrows-vertical"></i> Altura: <span id="valorAltura">1.70</span> m
             </label>
             <input type="range" class="form-range" id="altura" min="1.20" max="2.20" step="0.01" value="1.70">
         </div>
-        <div class="resultado text-center p-3 rounded">
-            <h3>IMC</h3>
+
+        <button class="btn btn-secondary mt-2 w-100" onclick="reset()"><i class="bi bi-arrow-counterclockwise"></i> Reset</button>
+
+        <div class="resultado text-center p-3 rounded bg-light border mb-4">
+            <h3><i class="bi bi-calculator"></i> IMC</h3>
             <h1 id="imc">24.22</h1>
-            <h4 id="clasificacion"> Normal</h4>
+            <h4 id="clasificacion"><i class="bi bi-info-circle"></i> Normal</h4>
         </div>
-        <button class="btn btn-secondary mt-4" onclick="reset()">reset</button>
-    </div>
-    <div class="card mt-4 p-3">
-        <h4 class="text-center">
-            Tabla de Clasificación
-        </h4>
-
-        <table class="table table-bordered text-center">
-            <thead>
-                <tr>
-                    <th>IMC</th>
-                    <th>Clasificación</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                <tr class="azul">
-                    <td>Menor a 18.5</td>
-                    <td>Bajo peso</td>
-                </tr>
-                <tr class="verde">
-                    <td>18.5 - 24.9</td>
-                    <td>Normal</td>
-                </tr>
-                <tr class="amarillo">
-                    <td>25 - 29.9</td>
-                    <td>Sobrepeso</td>
-                </tr>
-                <tr class="naranja">
-                    <td>30 - 34.9</td>
-                    <td>Obesidad I</td>
-                </tr>
-                <tr class="rojo">
-                    <td>35 - 39.9</td>
-                    <td>Obesidad II</td>
-                </tr>
-                <tr class="rojo-oscuro">
-                    <td>40 o mas</td>
-                    <td>Obesidad III</td>
-                </tr>
-        </table>
-    </div>
+        <div class="mb-4">
+            <div id="t-bajo" class="caja-imc bg-bajo">BAJO PESO (< 18.5)</div>
+            <div id="t-normal" class="caja-imc bg-normal">NORMAL (18.5 - 24.9)</div>
+            <div id="t-sobrepeso" class="caja-imc bg-sobrepeso">SOBREPESO (25 - 29.9)</div>
+            <div id="t-obs1" class="caja-imc bg-obs1">OBESIDAD I (30 - 34.9)</div>
+            <div id="t-obs2" class="caja-imc bg-obs2">OBESIDAD II (35 - 39.9)</div>
+            <div id="t-obs3" class="caja-imc bg-obs3">OBESIDAD III (Mayor a 40)</div>
+        </div>
+            <img src="imc.jpeg" alt="Logo" width="400px" height="400px"  class="d-inline-block align-text-top">
+    </div> 
 </div>
+
 <script src="imc.js"></script>
+<script src="bootstrap.bundle.min.js"></script>
+<script src="sweetalert2.all.min.js"></script>
 </body>
 </html>

@@ -1,34 +1,21 @@
-body {
-  background-color: #fffaf0; 
-  color: #4a3525;            
-  display: flex;
- 
-}
-
-.container {
-  text-align: center;
-  width: 550px;
-}
-
-h1 {
-  color: #d97706; 
-  
-}
-
-
-
-.controls {
-  flex: 1;
-  text-align: left;
-}
-
-.input-group {
-  margin-bottom: 18px;
-}
-
-.input-group label {
-  display: block;
-  font-weight: bold;
-  color: #78350f; 
-  margin-bottom: 6px;
-}
+.caja-imc {
+            padding: 10px;
+            margin: 5px 0;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 5px;
+            transition: 0.3s ease; 
+            transform: scale(1);  
+        }
+        .bg-bajo { background-color: #0dcaf0; }     
+        .bg-normal { background-color: #198754; }   
+        .bg-sobrepeso { background-color: #ffc107; color: black; } /* Amarillo */
+        .bg-obs1 { background-color: #fd7e14; }     
+        .bg-obs2 { background-color: #dc3545; }    
+        .bg-obs3 { background-color: #6f42c1; }   
+        .resaltar {
+            transform: scale(1.1);
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+            z-index: 10;
+        }
