@@ -2,60 +2,146 @@ var btnSave = document.getElementById("btnSave");
 var btnEdit = document.getElementById("btnEdit");
 var productos = [];
 
-btnSave.onclick = () => {
+const convertirBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = (error) => reject(error);
+    });
+};
+
+btnSave.onclick = async () => {
+    let inputImg = document.getElementById("imagen");
     let txtNombre = document.getElementById("nombre");
+    let txtCategoria = document.getElementById("categoria");
     let txtPrecio = document.getElementById("precio");
-    if(txtNombre.value == "" || txtPrecio.value == ""){
+    let txtCantidad = document.getElementById("cantidad");
+
+    if(txtNombre.value == "" || txtCategoria.value == "" || txtPrecio.value == "" || txtCantidad.value == ""){
         alert("ERROR: CAMPOS VACIOS");
         return;
     }
-    const producto = {
-        nombre: txtNombre.value,
-        precio: txtPrecio.value
+
+    let imagenBase64 = "";
+    if (inputImg.files && inputImg.files[0]) {
+        imagenBase64 = await convertirBase64(inputImg.files[0]);
     }
+
+    const producto = {
+        imagen: imagenBase64,
+        nombre: txtNombre.value,
+        categoria: txtCategoria.value,
+        precio: txtPrecio.value,
+        cantidad: txtCantidad.value
+    }
+
     productos.push(producto);
-    console.log(productos);
     localStorage.setItem("productos", JSON.stringify(productos));
     document.getElementById("addProductos").close();
+
+    inputImg.value = "";
     txtNombre.value = "";
+    txtCategoria.value = "";
     txtPrecio.value = "";
+    txtCantidad.value = "";
+
     cargarProductos();
 }
 
-btnEdit.onclick = () => {
+btnEdit.onclick = async () => {
+    let inputImg = document.getElementById("imagene");
     let txtNombre = document.getElementById("nombree");
+    let txtCategoria = document.getElementById("categoriae");
     let txtPrecio = document.getElementById("precioe");
+    let txtCantidad = document.getElementById("cantidade");
     let posicion = document.getElementById("posicion");
-    if(txtNombre.value == "" || txtPrecio.value == ""){
+
+    if(txtNombre.value == "" || txtCategoria.value == "" || txtPrecio.value == "" || txtCantidad.value == ""){
         alert("ERROR: CAMPOS VACIOS");
         return;
     }
-    productos[posicion.value].nombre = txtNombre.value;
-    productos[posicion.value].precio = txtPrecio.value;
+
+    let index = posicion.value;
+    let imagenBase64 = productos[index].imagen; 
+
+    if (inputImg.files && inputImg.files[0]) {
+        imagenBase64 = await convertirBase64(inputImg.files[0]);
+    }
+
+    productos[index].imagen = imagenBase64;
+    productos[index].nombre = txtNombre.value;
+    productos[index].categoria = txtCategoria.value;
+    productos[index].precio = txtPrecio.value;
+    productos[index].cantidad = txtCantidad.value;
+
     localStorage.setItem("productos", JSON.stringify(productos));
     document.getElementById("editProducto").close();
+    
+    inputImg.value = "";
     txtNombre.value = "";
+    txtCategoria.value = "";
     txtPrecio.value = "";
+    txtCantidad.value = "";
+
+    cargarProductos();
+}
+
+const filtrarPorSelect = () => {
     cargarProductos();
 }
 
 const cargarProductos = () => {
-    let posicion = 0;
     productos = JSON.parse(localStorage.getItem("productos")) || [];
     let tabla = document.getElementById("productos");
     let contenido = "";
-    productos.map((producto) => {
+    let sumaCantidad = 0;
+    let sumaPrecio = 0;
+    let sumaTotalGral = 0;
+    let selectFiltro = document.getElementById("filtroCategoria");
+    let categoriaSeleccionada = selectFiltro ? selectFiltro.value : "TODOS";
+
+    productos.forEach((producto, posicionReal) => {
+        if (categoriaSeleccionada !== "TODOS" && producto.categoria !== categoriaSeleccionada) {
+            return; 
+        }
+
+        let cant = parseFloat(producto.cantidad) || 0;
+        let prec = parseFloat(producto.precio) || 0;
+        let subtotal = prec * cant;
+        sumaCantidad += cant;
+        sumaPrecio += prec;
+        sumaTotalGral += subtotal;
+
+        let tagImg = producto.imagen ? `<img src="${producto.imagen}" width="50" height="50" class="rounded" style="object-fit: cover;">` : 'Sin imagen';
+
         contenido += `<tr>
+        <td class="text-center">${tagImg}</td>
         <td class="text-center">${producto.nombre.toUpperCase()}</td>
-        <td class="text-center">${parseFloat(producto.precio).toFixed(2)}</td>
+        <td class="text-center">${(producto.categoria || "").toUpperCase()}</td>
+        <td class="text-center">${prec.toFixed(2)}</td>
+        <td class="text-center">${cant}</td>
         <td class="text-center">
-            <button class="btn-solid btn-styled theme-danger" onclick="eliminarProducto(${posicion})"><i class="bi bi-trash"></i></button>
-            <button class="btn-solid btn-styled theme-warning" data-bs-toggle="dialog" data-bs-target="#editProducto" onclick="editarProducto(${posicion})"><i class="bi bi-pencil"></i></button>
+            <button class="btn-solid btn-styled theme-danger" onclick="eliminarProducto(${posicionReal})"><i class="bi bi-trash"></i></button>
+            <button class="btn-solid btn-styled theme-warning" data-bs-toggle="dialog" data-bs-target="#editProducto" onclick="editarProducto(${posicionReal})"><i class="bi bi-pencil"></i></button>
         </td>
         </tr>`;
-        posicion++;
     });
+
     tabla.innerHTML = contenido;
+
+    let tablaTotales = document.getElementById("totales");
+    if (tablaTotales) {
+        tablaTotales.innerHTML = `
+        <tr class="text-center fw-bold">
+            <td>TOTALES</td>
+            <td>-</td>
+            <td>-</td>
+            <td>${sumaPrecio.toFixed(2)}</td>
+            <td>${sumaCantidad}</td>
+            <td>${sumaTotalGral.toFixed(2)}</td>
+        </tr>`;
+    }
 }
 
 cargarProductos();
@@ -63,7 +149,9 @@ cargarProductos();
 const editarProducto = (posicion) => {
     const producto = productos[posicion];
     document.getElementById("nombree").value = producto.nombre;
+    document.getElementById("categoriae").value = producto.categoria;
     document.getElementById("precioe").value = producto.precio;
+    document.getElementById("cantidade").value = producto.cantidad;
     document.getElementById("posicion").value = posicion;
 }
 
@@ -83,7 +171,7 @@ const negro = Swal.mixin({
 const eliminarProducto = (posicion) => {
     swalWithBootstrapButtons.fire({
         title: "ELIMINAR REGISTRO",
-        text: "Estas seguro de eliminar este registro?",
+        text: "¿Estás seguro de eliminar este registro?",
         icon: "error",
         showCancelButton: true,
         confirmButtonText: "SI",
@@ -94,8 +182,7 @@ const eliminarProducto = (posicion) => {
             productos.splice(posicion, 1);
             localStorage.setItem("productos", JSON.stringify(productos));
             cargarProductos();
-            negro.fire({ title: "EXITO!", text: "Se elimino correctamente", icon: "success" });
+            negro.fire({ title: "EXITO!", text: "Se eliminó correctamente", icon: "success" });
         }
     });
 }
-

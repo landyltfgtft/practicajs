@@ -6,32 +6,69 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>PRACTICAS JAVASCRIPT</title>
-    
 </head>
-<body>
-    <nav class="navbar bg-primary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="menu.html">
-                <img src="img/OIP.jpg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">TIENDITA
+<body class="bg-light">
+    <div class="d-flex vh-100">
+        
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-dark text-white" style="width: 260px;">
+            <a href="menu.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                <img src="img/OIP.jpg" alt="Logo" width="30" height="24" class="rounded me-2">
+                <span>TIENDITA</span>
             </a>
+            <hr class="text-white">
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item mb-1">
+                    <a href="tiendita.html" class="nav-link text-white active">
+                        <i class="bi bi-hearts"></i> Productos
+                    </a>
+                </li>
+                <li class="nav-item mb-1">
+                    <a href="categoria.html" class="nav-link text-white">
+                        <i class="bi bi-star"></i> Categorías
+                    </a>
+                </li>
+            </ul>
         </div>
-    </nav>
 
-    <div class="container p-4 bg-inverse mt-5 card">
-        <h1 class="text-center fg-black">TIENDITA</h1><hr>
-        <div class="d-flex justify-content-end">
-             <button type="button" class="btn-solid btn-styled theme-primary w-25" data-bs-toggle="dialog" data-bs-target="#addProductos">
-                 <i class="bi bi-person-plus"></i>Agregar
-             </button>
+        <div class="flex-grow-1 p-4 overflow-auto">
+            <div class="container p-4 bg-inverse mt-3 card shadow-sm">
+                <h1 class="text-center" style="color:black;">TIENDITA</h1><hr>
+                
+               
+                <div class="mb-3 w-50 mx-auto">
+                    
+                    <select id="filtroCategoria" class="form-control" onchange="filtrarPorSelect()">
+                        <option value="TODOS">Todas las categorías</option>
+                        <option value="Refrescos">Refrescos</option>
+                        <option value="Botanas">Botanas</option>
+                        <option value="Higiene">Higiene</option>
+                        <option value="Frutas y Verduras">Frutas y Verduras</option>
+                        <option value="Limpieza">Limpieza</option>
+                    </select>
+                </div>
+
+                <div class="d-flex justify-content-end">
+                     <button type="button" class="btn-solid btn-styled theme-primary w-25" data-bs-toggle="dialog" data-bs-target="#addProductos">
+                         <i class="bi bi-person-plus"></i> Agregar
+                     </button>
+                </div>
+                <table class="table table-striped table-hover mt-3">
+                    <thead>
+                        <tr class="text-center">
+                            <th>IMAGEN</th>
+                            <th>PRODUCTO</th>
+                            <th>CATEGORÍA</th>
+                            <th>PRECIO</th>
+                            <th>CANTIDAD</th>
+                            <th>ACCIÓN</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productos"></tbody>
+                    <tfoot id="totales"></tfoot>
+                </table>
+            </div>
         </div>
-        <table class="table table-striped table-hover mt-3">
-            <tr class="text-center">
-                <td>PRODUCTO</td>
-                <td>PRECIO</td>
-                <td>ACTION</td>
-            </tr>
-            <tbody id="productos"></tbody>
-        </table>
+
     </div>
     <dialog class="dialog" id="addProductos">
       <div class="dialog-header">
@@ -39,10 +76,26 @@
         <button type="button" class="btn-close" data-bs-dismiss="dialog" aria-label="Close"></button>
       </div>
       <div class="dialog-body">
+        <h3>IMAGEN</h3>
+        <input type="file" id="imagen" class="form-control" accept="image/*"><br>
+
         <h3>NOMBRE</h3>
         <input type="text" id="nombre" class="form-control"><br>
+        
+        <h3>CATEGORÍA</h3>
+        <select id="categoria" class="form-control">
+            <option value="" disabled selected>Selecciona una categoría</option>
+            <option value="Refrescos">Refrescos</option>
+            <option value="Botanas">Botanas</option>
+            <option value="Higiene">Higiene</option>
+            <option value="Frutas y Verduras">Frutas y Verduras</option>
+            <option value="Limpieza">Limpieza</option>
+        </select><br>
+
         <h3>PRECIO</h3>
         <input type="text" id="precio" class="form-control"><br>
+        <h3>CANTIDAD</h3>
+        <input type="text" id="cantidad" class="form-control"><br>
       </div>
       <div class="dialog-footer">
         <button type="button" class="btn-solid theme-danger" data-bs-dismiss="dialog"><i class="bi bi-x-circle"></i>Cancelar</button>
@@ -56,10 +109,27 @@
         </div>
         <div class="dialog-body">
             <input type="hidden" id="posicion">
+            
+            <h3>IMAGEN NUEVA (Opcional)</h3>
+            <input type="file" id="imagene" class="form-control" accept="image/*"><br>
+
             <h3>NOMBRE</h3>
             <input type="text" id="nombree" class="form-control"><br>
+
+            <h3>CATEGORÍA</h3>
+            <select id="categoriae" class="form-control">
+                <option value="" disabled selected>Selecciona una categoría</option>
+                <option value="Refrescos">Refrescos</option>
+                <option value="Botanas">Botanas</option>
+                <option value="Higiene">Higiene</option>
+                <option value="Frutas y Verduras">Frutas y Verduras</option>
+                <option value="Limpieza">Limpieza</option>
+            </select><br>
+
             <h3>PRECIO</h3>
             <input type="text" id="precioe" class="form-control"><br>
+            <h3>CANTIDAD</h3>
+            <input type="text" id="cantidade" class="form-control"><br>
         </div>
         <div class="dialog-footer">
             <button type="button" class="btn-solid theme-danger" data-bs-dismiss="dialog">
