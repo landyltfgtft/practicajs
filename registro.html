@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
+    <title>PRACTICAS JAVASCRIPT - Registro</title>
+</head>
+<body class="bg-light">
+    <nav class="navbar bg-primary navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="contr.html">
+                <img src="img/OIP.jpg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                MENU
+            </a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card shadow-sm">
+                    <div class="card-body p-4">
+                        <h2 class="mb-3 text-center"><i class="bi bi-person-plus"></i> Registro</h2>
+                        <form id="formRegistro">
+                            <div class="mb-3">
+                                <label for="regEmail" class="form-label">Correo electrónico</label>
+                                <input type="email" class="form-control" id="regEmail" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="regPassword" class="form-label">Contraseña (mín. 6 caracteres)</label>
+                                <input type="password" class="form-control" id="regPassword" minlength="6" required>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">Registrar</button>
+                        </form>
+                        <hr>
+                        <p class="text-center mb-0">
+                            ¿Ya tienes cuenta? <a href="contr.html">Inicia sesión</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/sweetalert2.all.min.js"></script>
+    <script src="contr.js"></script>
+</body>
+</html>

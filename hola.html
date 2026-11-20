@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.2/font/bootstrap-icons.min.css">
+    <title>PRACTICAS JAVASCRIPT - Hola</title>
+</head>
+<body class="bg-light">
+    <nav class="navbar bg-primary navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="contr.html">
+                <img src="img/OIP.jpg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+                MENU
+            </a>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="card shadow-sm">
+            <div class="card-body p-4">
+                <h1 id="saludo" class="mb-3">Hola</h1>
+                <p id="infoToken" class="text-break small bg-body-tertiary p-3 rounded border"></p>
+                <button id="btnLogout" class="btn btn-danger">
+                    <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/sweetalert2.all.min.js"></script>
+    <script src="contr.js"></script>
+</body>
+</html>

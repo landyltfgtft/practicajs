@@ -1,6 +1,8 @@
 var btnSave = document.getElementById("btnSave");
 var btnEdit = document.getElementById("btnEdit");
 var productos = [];
+var dataTableInstance = null;
+var imagenesFiltradasParaPdf = [];
 
 const convertirBase64 = (file) => {
     return new Promise((resolve, reject) => {
@@ -8,6 +10,61 @@ const convertirBase64 = (file) => {
         reader.readAsDataURL(file);
         reader.onload = () => resolve(reader.result);
         reader.onerror = (error) => reject(error);
+    });
+};
+
+const inicializarDataTable = () => {
+    if ($.fn.DataTable.isDataTable("#tablaProductos")) {
+        $("#tablaProductos").DataTable().destroy();
+    }
+
+    dataTableInstance = $("#tablaProductos").DataTable({
+        pageLength: 5,
+        lengthMenu: [5, 10, 25, 50],
+        dom: "Bfrtip",
+        buttons: [
+            {
+                extend: "excelHtml5",
+                text: '<i class="bi bi-file-earmark-excel"></i> Excel',
+                className: "btn btn-success me-2",
+                title: "Productos - Tiendita",
+                exportOptions: {
+                    columns: [1, 2, 3, 4]
+                }
+            },
+            {
+                extend: "pdfHtml5",
+                text: '<i class="bi bi-file-earmark-pdf"></i> PDF',
+                className: "btn btn-danger",
+                title: "Productos - Tiendita",
+                exportOptions: {
+                    columns: [0, 1, 2, 3, 4]
+                },
+                customize: function (doc) {
+                    const tablaPdf = doc.content[1].table.body;
+                    // Fila 0 es el encabezado; las filas 1..N corresponden a los registros exportados
+                    for (let i = 1; i < tablaPdf.length; i++) {
+                        const base64Img = imagenesFiltradasParaPdf[i - 1];
+                        if (base64Img && base64Img.startsWith("data:image")) {
+                            tablaPdf[i][0] = {
+                                image: base64Img,
+                                width: 35,
+                                height: 35,
+                                alignment: "center"
+                            };
+                        } else {
+                            tablaPdf[i][0] = {
+                                text: "Sin imagen",
+                                alignment: "center"
+                            };
+                        }
+                    }
+                }
+            }
+        ],
+        language: {
+            url: "https://cdn.datatables.net/plug-ins/1.13.8/i18n/es-ES.json"
+        }
     });
 };
 
@@ -101,6 +158,8 @@ const cargarProductos = () => {
     let selectFiltro = document.getElementById("filtroCategoria");
     let categoriaSeleccionada = selectFiltro ? selectFiltro.value : "TODOS";
 
+    imagenesFiltradasParaPdf = [];
+
     productos.forEach((producto, posicionReal) => {
         if (categoriaSeleccionada !== "TODOS" && producto.categoria !== categoriaSeleccionada) {
             return; 
@@ -112,6 +171,8 @@ const cargarProductos = () => {
         sumaCantidad += cant;
         sumaPrecio += prec;
         sumaTotalGral += subtotal;
+
+        imagenesFiltradasParaPdf.push(producto.imagen || "");
 
         let tagImg = producto.imagen ? `<img src="${producto.imagen}" width="50" height="50" class="rounded" style="object-fit: cover;">` : 'Sin imagen';
 
@@ -128,6 +189,10 @@ const cargarProductos = () => {
         </tr>`;
     });
 
+    if ($.fn.DataTable.isDataTable("#tablaProductos")) {
+        $("#tablaProductos").DataTable().destroy();
+    }
+
     tabla.innerHTML = contenido;
 
     let tablaTotales = document.getElementById("totales");
@@ -142,6 +207,8 @@ const cargarProductos = () => {
             <td>${sumaTotalGral.toFixed(2)}</td>
         </tr>`;
     }
+
+    inicializarDataTable();
 }
 
 cargarProductos();

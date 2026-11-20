@@ -1,6 +1,42 @@
 var btnSave = document.getElementById("btnSave");
 var btnEdit = document.getElementById("btnEdit");
 var categorias = [];
+var dataTableInstance = null;
+
+const inicializarDataTable = () => {
+    if ($.fn.DataTable.isDataTable("#tablaCategorias")) {
+        $("#tablaCategorias").DataTable().destroy();
+    }
+
+    dataTableInstance = $("#tablaCategorias").DataTable({
+        pageLength: 5,
+        lengthMenu: [5, 10, 25, 50],
+        dom: "Bfrtip",
+        buttons: [
+            {
+                extend: "excelHtml5",
+                text: '<i class="bi bi-file-earmark-excel"></i> Excel',
+                className: "btn btn-success me-2",
+                title: "Categorías - Tiendita",
+                exportOptions: {
+                    columns: [0]
+                }
+            },
+            {
+                extend: "pdfHtml5",
+                text: '<i class="bi bi-file-earmark-pdf"></i> PDF',
+                className: "btn btn-danger",
+                title: "Categorías - Tiendita",
+                exportOptions: {
+                    columns: [0]
+                }
+            }
+        ],
+        language: {
+            url: "https://cdn.datatables.net/plug-ins/1.13.8/i18n/es-ES.json"
+        }
+    });
+};
 
 btnSave.onclick = () => {
     let txtNombreCategoria = document.getElementById("nombreCategoria");
@@ -57,8 +93,14 @@ const cargarCategorias = () => {
         </tr>`;
         posicion++;
     });
+
+    if ($.fn.DataTable.isDataTable("#tablaCategorias")) {
+        $("#tablaCategorias").DataTable().destroy();
+    }
     
     tabla.innerHTML = contenido;
+
+    inicializarDataTable();
 }
 cargarCategorias();
 
